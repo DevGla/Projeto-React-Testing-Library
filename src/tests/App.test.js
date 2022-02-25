@@ -53,4 +53,18 @@ describe('Testando Requisito 1', () => {
       .getByRole('heading', { level: 2, name: /Encountered pokémons/i });
     expect(tittle).toBeInTheDocument();
   });
+
+  it('Teste se a aplicação é redirecionada para a página Not Found', () => {
+    const history = createMemoryHistory();
+    render(
+      <Router history={ history }>
+        <App />
+      </Router>,
+    );
+    history.push('/ReactTestingLibrary');
+    const tittle = screen
+      .getByRole('heading', { level: 2, name: /Page requested not found/i });
+    expect(tittle).toBeInTheDocument();
+  });
+  // falta o ultimo teste
 });

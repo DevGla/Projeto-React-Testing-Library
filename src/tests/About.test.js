@@ -1,17 +1,15 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 describe('Testando Requisito 2', () => {
   beforeEach(() => {
-    const history = createMemoryHistory();
     render(
-      <Router history={ history }>
+      <MemoryRouter>
         <App />
-      </Router>,
+      </MemoryRouter>,
     );
   });
 
