@@ -1,15 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 describe('Testando Requisito 2', () => {
   beforeEach(() => {
+    const history = createMemoryHistory();
     render(
-      <MemoryRouter>
+      <Router history={ history }>
         <App />
-      </MemoryRouter>,
+      </Router>,
     );
   });
 
@@ -38,6 +40,9 @@ describe('Testando Requisito 2', () => {
   });
 
   it('Teste se a página contém a seguinte imagem de uma Pokédex', () => {
-    // const image = getByRole('img');
+    const link = screen.getByRole('link', { name: /about/i });
+    userEvent.click(link);
+    const image = screen.getByRole('img', { name: /Pokédex/i });
+    expect(image).toHaveAttribute('src', 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png');
   });
 });
