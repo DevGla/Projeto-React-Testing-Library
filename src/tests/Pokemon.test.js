@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 
 // TODOS OS TESTES COMENTADOS ESTÃO SENDO TESTADOS POR OUTROS SENDO ASSIM ESTÃO COMENTADOS
+const MORE_DETAILS = 'More details';
 
 function before() {
   beforeEach(() => {
@@ -46,12 +47,12 @@ describe('', () => {
   it('Teste se o card do Pokémon indicado na Pokédex contém um link', () => {
     const pikachu = screen.getByText('Pikachu');
     expect(pikachu).toBeInTheDocument();
-    const link = screen.getByRole('link', { name: /More details/i });
+    const link = screen.getByRole('link', { name: MORE_DETAILS });
     expect(link).toHaveAttribute('href', '/pokemons/25');
   });
 
   it('Teste se ao clicar no link de navegação do Pokémon', () => {
-    const link = screen.getByRole('link', { name: 'More details' });
+    const link = screen.getByRole('link', { name: MORE_DETAILS });
     userEvent.click(link);
     const summary = screen.getByRole('heading', { name: /summary/i });
     expect(summary).toBeInTheDocument();
@@ -60,7 +61,7 @@ describe('', () => {
   it('Teste também se a URL exibida no navegador muda ', () => {
     const pikachu = screen.getByTestId('pokemon-name');
     expect(pikachu).toBeInTheDocument();
-    const link = screen.getByRole('link', { name: 'More details' });
+    const link = screen.getByRole('link', { name: MORE_DETAILS });
     userEvent.click(link);
     const pokemon = screen.getByRole('heading', { name: 'Pikachu Details' });
     expect(pokemon).toBeInTheDocument();
@@ -69,7 +70,7 @@ describe('', () => {
 describe('Teste se existe um ícone de estrela nos Pokémons favoritados', () => {
   before();
   it('O ícone deve ser uma imagem com o atributo ', () => {
-    const link = screen.getByRole('link', { name: 'More details' });
+    const link = screen.getByRole('link', { name: MORE_DETAILS });
     userEvent.click(link);
     const favorite = screen.getByLabelText('Pokémon favoritado?');
     userEvent.click(favorite);
