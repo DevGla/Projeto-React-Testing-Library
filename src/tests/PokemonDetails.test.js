@@ -5,9 +5,9 @@ import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
+const PIKACHU_LOCATION = 'Pikachu location';
 const MORE_DETAILS = 'More details';
 const PIKACHU_DETAILS = 'Pikachu Details';
-const PIKACHU_LOCATION = 'Pikachu location';
 const POKEMON_FAVORITE = 'Pokémon favoritado?';
 
 function before() {
@@ -58,6 +58,7 @@ describe('Teste se as informações detalhadas do Pokémon selecionado', () => {
 
 describe('Teste se existe na página uma seção com os mapas', () => {
   before();
+  const images = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
   it('Na seção de detalhes deverá existir um heading h2', () => {
     const details = screen.getByRole('link', { name: MORE_DETAILS });
     userEvent.click(details);
@@ -73,7 +74,6 @@ describe('Teste se existe na página uma seção com os mapas', () => {
     userEvent.click(details);
     const pokemon = screen.getByRole('heading', { level: 2, name: PIKACHU_DETAILS });
     expect(pokemon).toBeInTheDocument();
-    const images = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
     expect(images).toHaveLength(2);
   });
 
@@ -82,7 +82,6 @@ describe('Teste se existe na página uma seção com os mapas', () => {
     userEvent.click(details2);
     const pokemon = screen.getByRole('heading', { level: 2, name: PIKACHU_DETAILS });
     expect(pokemon).toBeInTheDocument();
-    const images2 = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
     expect(images2).toHaveLength(2);
     const location1 = screen.getByText('Kanto Power Plant');
     expect(location1).toBeInTheDocument();
@@ -112,8 +111,8 @@ describe('Teste se o usuário pode favoritar um pokémon', () => {
     const images2 = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
     expect(images2).toHaveLength(2);
     const locations = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
-    expect(locations[0]).toHaveAttribute('alt', 'Pikachu location');
-    expect(locations[1]).toHaveAttribute('alt', 'Pikachu location');
+    expect(locations[0]).toHaveAttribute('alt', PIKACHU_LOCATION);
+    expect(locations[1]).toHaveAttribute('alt', PIKACHU_LOCATION);
   });
   it('A página deve exibir um checkbox', () => {
     const details2 = screen.getByRole('link', { name: MORE_DETAILS });
