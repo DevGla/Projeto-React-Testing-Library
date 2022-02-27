@@ -58,7 +58,6 @@ describe('Teste se as informações detalhadas do Pokémon selecionado', () => {
 
 describe('Teste se existe na página uma seção com os mapas', () => {
   before();
-  const images = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
   it('Na seção de detalhes deverá existir um heading h2', () => {
     const details = screen.getByRole('link', { name: MORE_DETAILS });
     userEvent.click(details);
@@ -74,6 +73,7 @@ describe('Teste se existe na página uma seção com os mapas', () => {
     userEvent.click(details);
     const pokemon = screen.getByRole('heading', { level: 2, name: PIKACHU_DETAILS });
     expect(pokemon).toBeInTheDocument();
+    const images = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
     expect(images).toHaveLength(2);
   });
 
@@ -82,6 +82,7 @@ describe('Teste se existe na página uma seção com os mapas', () => {
     userEvent.click(details2);
     const pokemon = screen.getByRole('heading', { level: 2, name: PIKACHU_DETAILS });
     expect(pokemon).toBeInTheDocument();
+    const images2 = screen.getAllByRole('img', { name: PIKACHU_LOCATION });
     expect(images2).toHaveLength(2);
     const location1 = screen.getByText('Kanto Power Plant');
     expect(location1).toBeInTheDocument();
