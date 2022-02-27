@@ -5,7 +5,6 @@ import { Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 
-// TODOS OS TESTES COMENTADOS ESTÃO SENDO TESTADOS POR OUTROS SENDO ASSIM ESTÃO COMENTADOS
 const MORE_DETAILS = 'More details';
 
 function before() {
